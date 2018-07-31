@@ -1,0 +1,54 @@
+---
+- hosts: 192.168.1.203
+  remote_user: root
+  tasks:
+   - name: wget
+     yum: name=wget state=latest 
+   - name: patch
+     yum: name=patch state=latest 
+   - name: gcc 
+     yum: name=gcc  state=latest 
+   - name: man
+     yum: name=man state=latest 
+   - name: curl
+     yum: name=curl state=latest 
+   - name: curl-devel
+     yum: name=curl-devel state=latest 
+   - name: xinetd
+     yum: name=xinetd state=latest 
+   - name: rsync
+     yum: name=rsync state=latest 
+   - name: zip
+     yum: name=zip state=latest 
+   - name: unzip
+     yum: name=unzip state=latest 
+   - name: ntp
+     yum: name=ntp state=latest 
+   - name: mod_ssl
+     yum: name=mod_ssl state=latest 
+   - name: whois
+     yum: name=whois state=latest 
+   - name: epel-release
+     yum: name=epel-release state=latest 
+   - name: git
+     yum: name=git state=latest 
+   - name: python-pip
+     yum: name=python-pip state=latest 
+   - name: libselinux-python
+     yum: name=libselinux-python state=latest 
+   - name: iptables
+     yum: name=iptables state=latest 
+   - name: tree
+     yum: name=tree state=latest 
+   - name: telnet
+     yum: name=telnet state=latest 
+   - name: net-tools
+     yum: name=telnet state=latest 
+   - name: firewalld
+     yum: name=firewalld  state=latest 
+   - name: yum-utils
+     yum: name=yum-utils  state=latest 
+   - name: policycoreutils-python
+     yum: name=policycoreutils-python  state=latest 
+   - selinux:
+     state: disabled
