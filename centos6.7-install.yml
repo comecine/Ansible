@@ -62,5 +62,6 @@
      yum: name=make  state=latest    
    - name: net-snmp
      yum: name=net-snmp  state=latest    
-   - selinux:
-     state: disabled
+   - name: Disable selinux
+     selinux: state=disabled
+
