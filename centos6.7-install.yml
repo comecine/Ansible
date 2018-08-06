@@ -43,7 +43,7 @@
    - name: telnet
      yum: name=telnet state=latest
    - name: net-tools
-     yum: name=telnet state=latest
+     yum: name=net-tools state=latest
    - name: firewalld
      yum: name=firewalld  state=latest
    - name: yum-utils
