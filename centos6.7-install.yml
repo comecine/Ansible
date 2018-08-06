@@ -50,5 +50,17 @@
      yum: name=yum-utils  state=latest
    - name: policycoreutils-python
      yum: name=policycoreutils-python  state=latest
+   - name: glibc
+     yum: name=glibc  state=latest
+   - name: glibc-common
+     yum: name=glibc-common  state=latest
+   - name: gd
+     yum: name=gd  state=latest
+   - name: gd-devel
+     yum: name=gd-devel  state=latest    
+   - name: make
+     yum: name=make  state=latest    
+   - name: net-snmp
+     yum: name=net-snmp  state=latest    
    - selinux:
      state: disabled
