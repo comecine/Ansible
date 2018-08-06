@@ -44,6 +44,10 @@
      yum: name=telnet state=latest
    - name: net-tools
      yum: name=net-tools state=latest
+   - name:  bind-utils
+     yum: name=bind-utils state=latest     
+   - name:  traceroute
+     yum: name=traceroute state=latest               
    - name: firewalld
      yum: name=firewalld  state=latest
    - name: yum-utils
