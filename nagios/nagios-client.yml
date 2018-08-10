@@ -1,0 +1,73 @@
+---
+- hosts: client
+  remote_user: root
+  tasks:
+   - name: wget
+     yum: name=wget state=latest
+   - name: httpd
+     yum: name=httpd state=latest
+   - name: php
+     yum: name=php state=latest
+   - name: glibc
+     yum: name=glibc state=latest
+   - name: glibc-common
+     yum: name=glibc-common state=latest
+   - name: gd
+     yum: name=gd state=latest
+   - name: gd-devel
+     yum: name=gd-devel state=latest
+   - name: make
+     yum: name=make state=latest
+   - name:  net-snmp
+     yum:  name=net-snmp state=latest
+   - name: unzip
+     yum: name=unzip state=latest
+   - name: openssl-devel
+     yum: name=openssl-devel state=latest
+   - name: gcc
+     yum: name=gcc state=latest
+   - name: Disable selinux
+     selinux: state=disabled
+
+# git files from github
+   - git:
+      repo: 'https://github.com/comecine/Ansible-Playbook-Nagios-client-nrpe.git'
+      dest: /tmp/nrpe
+      update: no
+
+#installed nrpe
+   - name: Running ./configure for nrpe
+     command: './configure chdir=/tmp/nrpe'
+   - name: Running "make all" for nrpe
+     command: 'make all chdir=/tmp/nrpe'
+   - name: Running "install-groups"
+     command: 'groupadd -r nagios'
+   - name: Running "install-groups-users"
+     command: 'useradd -r -g nagios nagios'
+   - name: Running "make install" for nrpe
+     command: 'make install chdir=/tmp/nrpe'
+   - name: Running "make install-plugin"
+     command: 'make install-plugin chdir=/tmp/nrpe'
+   - name: Running "make install-plugin"
+     command: 'make install-plugin chdir=/tmp/nrpe'
+   - name: Running "make install-daemon"
+     command: 'make install-daemon chdir=/tmp/nrpe'
+   - name: Running "make install-config"
+     command: 'make install-config chdir=/tmp/nrpe'
+   - name: Running "make install-inetd"
+     command: 'make install-inetd chdir=/tmp/nrpe'
+   - name: Running "make install-init"
+     command: 'make install-init chdir=/tmp/nrpe'
+   - name: add nagios server
+     lineinfile:
+         dest: /usr/local/nagios/etc/nrpe.cfg
+         regexp: '^allowed_hosts='
+         line: 'allowed_hosts=127.0.0.1,::191.168.1.221'
+   - name: nrpe start
+     command: 'systemctl start nrpe'
+
+#open 5666 port
+   - name: Running "open port 5666"
+     command: 'firewall-cmd --zone=public --add-port=5666/tcp --permanent'
+   - name: Running "reload firewall"
+     command: 'firewall-cmd --reload'
